@@ -18,6 +18,14 @@ type GitHubRepo struct {
 	CreatedAt       time.Time `json:"created_at"`
 }
 
+func (repo GitHubRepo) String() string {
+	res := fmt.Sprintf(
+		"Name: %s\nDescription: %s\nStargazersCount: %d\nForksCount: %d\nCreatedAt: %s\n",
+		repo.Name, repo.Description, repo.StargazersCount, repo.ForksCount, repo.CreatedAt,
+	)
+	return res
+}
+
 func getCLIValues() (string, string, error) {
 	repo := flag.String("repo", "", "name of repository, that you want check")
 	owner := flag.String("owner", "", "owner's name of this repository")
@@ -26,14 +34,6 @@ func getCLIValues() (string, string, error) {
 		return "", "", errors.New("repo and owner values are required")
 	}
 	return *repo, *owner, nil
-}
-
-func createRepoInfo(repo GitHubRepo) string {
-	res := fmt.Sprintf(
-		"Name: %s\nDescription: %s\nStargazersCount: %d\nForksCount: %d\nCreatedAt: %s\n",
-		repo.Name, repo.Description, repo.StargazersCount, repo.ForksCount, repo.CreatedAt,
-	)
-	return res
 }
 
 func main() {
@@ -55,6 +55,5 @@ func main() {
 	if err != nil {
 		log.Fatalf("incorrect decoding to Go struct: %s", err)
 	}
-	result := createRepoInfo(repoInfo)
-	fmt.Print(result)
+	fmt.Print(repoInfo)
 }
