@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
 
 	"github.com/SANEKNAYMCHIK/distrib-system/collector/internal/domain"
 )
@@ -15,19 +14,19 @@ type GitHubReposClient struct {
 	client  *http.Client
 }
 
-func NewGitHubReposClient() *GitHubClient {
-	return &GitHubClient{
+func NewGitHubReposClient() *GitHubReposClient {
+	return &GitHubReposClient{
 		baseURL: "https://api.github.com/repos",
 		client:  new(http.Client),
 	}
 }
 
 type gitHubRepo struct {
-	Name            string    `json:"name"`
-	Description     string    `json:"description"`
-	StargazersCount int       `json:"stargazers_count"`
-	ForksCount      int       `json:"forks_count"`
-	CreatedAt       time.Time `json:"created_at"`
+	Name            string `json:"name"`
+	Description     string `json:"description"`
+	StargazersCount int32  `json:"stargazers_count"`
+	ForksCount      int32  `json:"forks_count"`
+	CreatedAt       string `json:"created_at"`
 }
 
 func (repo gitHubRepo) String() string {
