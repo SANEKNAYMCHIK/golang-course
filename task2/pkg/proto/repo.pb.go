@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v6.33.1
-// source: collector/internal/proto/repo.proto
+// source: pkg/proto/repo.proto
 
 package proto
 
@@ -31,7 +31,7 @@ type RepoRequest struct {
 
 func (x *RepoRequest) Reset() {
 	*x = RepoRequest{}
-	mi := &file_collector_internal_proto_repo_proto_msgTypes[0]
+	mi := &file_pkg_proto_repo_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *RepoRequest) String() string {
 func (*RepoRequest) ProtoMessage() {}
 
 func (x *RepoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_collector_internal_proto_repo_proto_msgTypes[0]
+	mi := &file_pkg_proto_repo_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *RepoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RepoRequest.ProtoReflect.Descriptor instead.
 func (*RepoRequest) Descriptor() ([]byte, []int) {
-	return file_collector_internal_proto_repo_proto_rawDescGZIP(), []int{0}
+	return file_pkg_proto_repo_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *RepoRequest) GetOwner() string {
@@ -86,7 +86,7 @@ type RepoResponse struct {
 
 func (x *RepoResponse) Reset() {
 	*x = RepoResponse{}
-	mi := &file_collector_internal_proto_repo_proto_msgTypes[1]
+	mi := &file_pkg_proto_repo_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -98,7 +98,7 @@ func (x *RepoResponse) String() string {
 func (*RepoResponse) ProtoMessage() {}
 
 func (x *RepoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_collector_internal_proto_repo_proto_msgTypes[1]
+	mi := &file_pkg_proto_repo_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -111,7 +111,7 @@ func (x *RepoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RepoResponse.ProtoReflect.Descriptor instead.
 func (*RepoResponse) Descriptor() ([]byte, []int) {
-	return file_collector_internal_proto_repo_proto_rawDescGZIP(), []int{1}
+	return file_pkg_proto_repo_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *RepoResponse) GetName() string {
@@ -149,11 +149,11 @@ func (x *RepoResponse) GetCreatedAt() string {
 	return ""
 }
 
-var File_collector_internal_proto_repo_proto protoreflect.FileDescriptor
+var File_pkg_proto_repo_proto protoreflect.FileDescriptor
 
-const file_collector_internal_proto_repo_proto_rawDesc = "" +
+const file_pkg_proto_repo_proto_rawDesc = "" +
 	"\n" +
-	"#collector/internal/proto/repo.proto\x12\x04repo\"7\n" +
+	"\x14pkg/proto/repo.proto\x12\x04repo\"7\n" +
 	"\vRepoRequest\x12\x14\n" +
 	"\x05owner\x18\x01 \x01(\tR\x05owner\x12\x12\n" +
 	"\x04repo\x18\x02 \x01(\tR\x04repo\"\x99\x01\n" +
@@ -167,26 +167,26 @@ const file_collector_internal_proto_repo_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x05 \x01(\tR\tcreatedAt2E\n" +
 	"\vRepoService\x126\n" +
-	"\vGetRepoInfo\x12\x11.repo.RepoRequest\x1a\x12.repo.RepoResponse\"\x00B Z\x1ecollector/internal/proto;protob\x06proto3"
+	"\vGetRepoInfo\x12\x11.repo.RepoRequest\x1a\x12.repo.RepoResponse\"\x00B\x11Z\x0fpkg/proto;protob\x06proto3"
 
 var (
-	file_collector_internal_proto_repo_proto_rawDescOnce sync.Once
-	file_collector_internal_proto_repo_proto_rawDescData []byte
+	file_pkg_proto_repo_proto_rawDescOnce sync.Once
+	file_pkg_proto_repo_proto_rawDescData []byte
 )
 
-func file_collector_internal_proto_repo_proto_rawDescGZIP() []byte {
-	file_collector_internal_proto_repo_proto_rawDescOnce.Do(func() {
-		file_collector_internal_proto_repo_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_collector_internal_proto_repo_proto_rawDesc), len(file_collector_internal_proto_repo_proto_rawDesc)))
+func file_pkg_proto_repo_proto_rawDescGZIP() []byte {
+	file_pkg_proto_repo_proto_rawDescOnce.Do(func() {
+		file_pkg_proto_repo_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_pkg_proto_repo_proto_rawDesc), len(file_pkg_proto_repo_proto_rawDesc)))
 	})
-	return file_collector_internal_proto_repo_proto_rawDescData
+	return file_pkg_proto_repo_proto_rawDescData
 }
 
-var file_collector_internal_proto_repo_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_collector_internal_proto_repo_proto_goTypes = []any{
+var file_pkg_proto_repo_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_pkg_proto_repo_proto_goTypes = []any{
 	(*RepoRequest)(nil),  // 0: repo.RepoRequest
 	(*RepoResponse)(nil), // 1: repo.RepoResponse
 }
-var file_collector_internal_proto_repo_proto_depIdxs = []int32{
+var file_pkg_proto_repo_proto_depIdxs = []int32{
 	0, // 0: repo.RepoService.GetRepoInfo:input_type -> repo.RepoRequest
 	1, // 1: repo.RepoService.GetRepoInfo:output_type -> repo.RepoResponse
 	1, // [1:2] is the sub-list for method output_type
@@ -196,26 +196,26 @@ var file_collector_internal_proto_repo_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_collector_internal_proto_repo_proto_init() }
-func file_collector_internal_proto_repo_proto_init() {
-	if File_collector_internal_proto_repo_proto != nil {
+func init() { file_pkg_proto_repo_proto_init() }
+func file_pkg_proto_repo_proto_init() {
+	if File_pkg_proto_repo_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_collector_internal_proto_repo_proto_rawDesc), len(file_collector_internal_proto_repo_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_pkg_proto_repo_proto_rawDesc), len(file_pkg_proto_repo_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_collector_internal_proto_repo_proto_goTypes,
-		DependencyIndexes: file_collector_internal_proto_repo_proto_depIdxs,
-		MessageInfos:      file_collector_internal_proto_repo_proto_msgTypes,
+		GoTypes:           file_pkg_proto_repo_proto_goTypes,
+		DependencyIndexes: file_pkg_proto_repo_proto_depIdxs,
+		MessageInfos:      file_pkg_proto_repo_proto_msgTypes,
 	}.Build()
-	File_collector_internal_proto_repo_proto = out.File
-	file_collector_internal_proto_repo_proto_goTypes = nil
-	file_collector_internal_proto_repo_proto_depIdxs = nil
+	File_pkg_proto_repo_proto = out.File
+	file_pkg_proto_repo_proto_goTypes = nil
+	file_pkg_proto_repo_proto_depIdxs = nil
 }

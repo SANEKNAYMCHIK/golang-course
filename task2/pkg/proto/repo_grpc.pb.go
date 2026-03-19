@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v6.33.1
-// source: collector/internal/proto/repo.proto
+// source: pkg/proto/repo.proto
 
 package proto
 
@@ -117,5 +117,5 @@ var RepoService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "collector/internal/proto/repo.proto",
+	Metadata: "pkg/proto/repo.proto",
 }

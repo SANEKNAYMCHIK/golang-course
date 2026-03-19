@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package repo;
 
-option go_package = "collector/internal/proto;proto";
+option go_package = "pkg/proto;proto";
 
 service RepoService {
 	rpc GetRepoInfo (RepoRequest) returns (RepoResponse) {}
