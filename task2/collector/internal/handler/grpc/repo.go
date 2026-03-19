@@ -1,8 +1,10 @@
 package handler
 
 import (
-	pb "github.com/SANEKNAYMCHIK/distrib-system/collector/internal/proto"
+	"context"
+
 	"github.com/SANEKNAYMCHIK/distrib-system/collector/internal/usecase"
+	pb "github.com/SANEKNAYMCHIK/distrib-system/pkg/proto"
 )
 
 type RepoHandler struct {
@@ -16,8 +18,8 @@ func NewRepoHandler(uc *usecase.RepoUseCase) *RepoHandler {
 	}
 }
 
-func (rh *RepoHandler) GetRepoHandler(usecase *usecase.RepoUseCase, req *pb.RepoRequest) (*pb.RepoResponse, error) {
-	repo, err := usecase.GetRepo(req.Owner, req.Repo)
+func (rh *RepoHandler) GetRepoInfo(ctx context.Context, req *pb.RepoRequest) (*pb.RepoResponse, error) {
+	repo, err := rh.usecase.GetRepo(req.Owner, req.Repo)
 	if err != nil {
 		return nil, err
 	}

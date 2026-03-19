@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/SANEKNAYMCHIK/distrib-system/collector/internal/domain"
+	"github.com/SANEKNAYMCHIK/distrib-system/pkg/domain"
 )
 
 type GitHubReposClient struct {

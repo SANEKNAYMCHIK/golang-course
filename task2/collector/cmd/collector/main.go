@@ -6,8 +6,8 @@ import (
 
 	adapter "github.com/SANEKNAYMCHIK/distrib-system/collector/internal/adapter/github"
 	handler "github.com/SANEKNAYMCHIK/distrib-system/collector/internal/handler/grpc"
-	pb "github.com/SANEKNAYMCHIK/distrib-system/collector/internal/proto"
 	"github.com/SANEKNAYMCHIK/distrib-system/collector/internal/usecase"
+	pb "github.com/SANEKNAYMCHIK/distrib-system/pkg/proto"
 	"google.golang.org/grpc"
 )
 

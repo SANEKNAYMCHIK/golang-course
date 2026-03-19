@@ -1,6 +1,6 @@
 package usecase
 
-import "github.com/SANEKNAYMCHIK/distrib-system/collector/internal/domain"
+import "github.com/SANEKNAYMCHIK/distrib-system/pkg/domain"
 
 type RepoProvider interface {
 	GetRepoInfo(owner, repo string) (domain.Repo, error)
