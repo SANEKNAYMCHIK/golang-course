@@ -1,0 +1,24 @@
+services:
+  collector:
+    build:
+      context: .
+      dockerfile: collector/Dockerfile
+    container_name: collector
+    ports:
+      - "50051:50051"
+
+  apigateway:
+    build:
+      context: .
+      dockerfile: apigateway/Dockerfile
+    container_name: apigateway
+    ports:
+      - "8080:8080"
+    environment:
+      - GRPC_CONN=collector:50051
+    depends_on:
+      - collector
+
+networks:
+  app-network:
+    driver: bridge

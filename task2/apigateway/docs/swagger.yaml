@@ -1,0 +1,70 @@
+basePath: /
+definitions:
+  domain.Repo:
+    properties:
+      createdAt:
+        type: string
+      description:
+        type: string
+      forks:
+        format: int32
+        type: integer
+      name:
+        type: string
+      stargazers:
+        format: int32
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API gateway for GitHub repositories.
+  title: GitHub Repo API
+  version: "1.0"
+paths:
+  /repos/{owner}/{repo}:
+    get:
+      consumes:
+      - application/json
+      description: Returns information about a GitHub repository by owner and repo
+        name.
+      parameters:
+      - description: Repository owner (user or organization)
+        in: path
+        name: owner
+        required: true
+        type: string
+      - description: Repository name
+        in: path
+        name: repo
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Repo'
+        "301":
+          description: Moved permanently
+          schema:
+            type: string
+        "403":
+          description: Forbidden
+          schema:
+            type: string
+        "404":
+          description: Not found
+          schema:
+            type: string
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+      summary: Get repository information
+      tags:
+      - repos
+schemes:
+- http
+swagger: "2.0"
