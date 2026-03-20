@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/SANEKNAYMCHIK/distrib-system/pkg/domain"
 )
@@ -17,7 +18,7 @@ type GitHubReposClient struct {
 func NewGitHubReposClient() *GitHubReposClient {
 	return &GitHubReposClient{
 		baseURL: "https://api.github.com/repos",
-		client:  new(http.Client),
+		client:  &http.Client{Timeout: 5 * time.Second},
 	}
 }
 

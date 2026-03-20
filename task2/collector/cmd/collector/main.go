@@ -14,10 +14,10 @@ import (
 func main() {
 	githubClient := adapter.NewGitHubReposClient()
 	useCase := usecase.NewRepoUseCase(githubClient)
-	handler := handler.NewRepoHandler(useCase)
+	repoHandler := handler.NewRepoHandler(useCase)
 
 	server := grpc.NewServer()
-	pb.RegisterRepoServiceServer(server, handler)
+	pb.RegisterRepoServiceServer(server, repoHandler)
 
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
