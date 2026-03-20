@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	_ "github.com/SANEKNAYMCHIK/distrib-system/apigateway/docs"
 	adapter "github.com/SANEKNAYMCHIK/distrib-system/apigateway/internal/adapter/grpc"
@@ -22,11 +23,11 @@ import (
 // @BasePath  /
 // @schemes   http
 func main() {
-	// grpcConn := os.Getenv("GRPC_CONN")
-	// if grpcConn == "" {
-	// 	grpcConn = "localhost:50051"
-	// }
-	conn, err := grpc.NewClient("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	grpcConn := os.Getenv("GRPC_CONN")
+	if grpcConn == "" {
+		grpcConn = "localhost:50051"
+	}
+	conn, err := grpc.NewClient(grpcConn, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("failed to connect: %v", err)
 	}
