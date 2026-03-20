@@ -3,7 +3,7 @@ package adapter
 import (
 	"context"
 
-	"github.com/SANEKNAYMCHIK/distrib-system/pkg/domain"
+	"github.com/SANEKNAYMCHIK/distrib-system/apigateway/internal/domain"
 	pb "github.com/SANEKNAYMCHIK/distrib-system/pkg/proto"
 )
 

@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/SANEKNAYMCHIK/distrib-system/apigateway/internal/usecase"
+	"github.com/go-chi/chi"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -20,9 +21,23 @@ func NewRepoHandler(uc *usecase.RepoUseCase) *RepoHandler {
 	}
 }
 
+// GetRepoInfo godoc
+// @Summary      Get repository information
+// @Description  Returns information about a GitHub repository by owner and repo name.
+// @Tags         repos
+// @Accept       json
+// @Produce      json
+// @Param        owner   path      string  true  "Repository owner (user or organization)"
+// @Param        repo    path      string  true  "Repository name"
+// @Success      200  {object}  domain.Repo
+// @Failure      301  {string}  string  "Moved permanently"
+// @Failure      403  {string}  string  "Forbidden"
+// @Failure      404  {string}  string  "Not found"
+// @Failure      500  {string}  string  "Internal server error"
+// @Router       /repos/{owner}/{repo} [get]
 func (rh *RepoHandler) GetRepoInfo(w http.ResponseWriter, r *http.Request) {
-	owner := r.URL.Query().Get("owner")
-	repo := r.URL.Query().Get("repo")
+	owner := chi.URLParam(r, "owner")
+	repo := chi.URLParam(r, "repo")
 
 	data, err := rh.usecase.GetRepo(r.Context(), owner, repo)
 

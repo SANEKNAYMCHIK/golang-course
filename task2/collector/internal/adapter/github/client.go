@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/SANEKNAYMCHIK/distrib-system/pkg/domain"
+	"github.com/SANEKNAYMCHIK/distrib-system/collector/internal/domain"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
