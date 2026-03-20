@@ -8,6 +8,8 @@ import (
 	"time"
 
 	"github.com/SANEKNAYMCHIK/distrib-system/pkg/domain"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 type GitHubReposClient struct {
@@ -46,7 +48,16 @@ func (g *GitHubReposClient) GetRepoInfo(owner, repo string) (domain.Repo, error)
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		log.Fatalf("something went wrong: %s", resp.Status)
+		switch resp.StatusCode {
+		case http.StatusNotFound:
+			return domain.Repo{}, status.Error(codes.NotFound, resp.Status)
+		case http.StatusMovedPermanently:
+			return domain.Repo{}, status.Error(codes.Unknown, resp.Status)
+		case http.StatusForbidden:
+			return domain.Repo{}, status.Error(codes.PermissionDenied, resp.Status)
+		default:
+			return domain.Repo{}, status.Error(codes.DataLoss, resp.Status)
+		}
 	}
 	var repoInfo gitHubRepo
 	if err := json.NewDecoder(resp.Body).Decode(&repoInfo); err != nil {
