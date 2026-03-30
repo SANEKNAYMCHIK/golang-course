@@ -16,6 +16,8 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
+const gRPC_env = "GRPC_CONN"
+
 // @title           GitHub Repo API
 // @version         1.0
 // @description     API gateway for GitHub repositories.
@@ -23,7 +25,7 @@ import (
 // @BasePath  /
 // @schemes   http
 func main() {
-	grpcConn := os.Getenv("GRPC_CONN")
+	grpcConn := os.Getenv(gRPC_env)
 	if grpcConn == "" {
 		grpcConn = "localhost:50051"
 	}

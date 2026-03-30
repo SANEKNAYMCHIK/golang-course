@@ -33,11 +33,14 @@ type gitHubRepo struct {
 }
 
 func (repo gitHubRepo) String() string {
-	res := fmt.Sprintf(
-		"Name: %s\nDescription: %s\nStargazersCount: %d\nForksCount: %d\nCreatedAt: %s\n",
-		repo.Name, repo.Description, repo.StargazersCount, repo.ForksCount, repo.CreatedAt,
-	)
-	return res
+	template := `
+	Name: %s
+	Description: %s
+	StargazersCount: %d
+	ForksCount: %d
+	CreatedAt: %s
+	`
+	return fmt.Sprintf(template, repo.Name, repo.Description, repo.StargazersCount, repo.ForksCount, repo.CreatedAt)
 }
 
 func (g *GitHubReposClient) GetRepoInfo(owner, repo string) (domain.Repo, error) {
@@ -47,21 +50,20 @@ func (g *GitHubReposClient) GetRepoInfo(owner, repo string) (domain.Repo, error)
 		log.Fatalf("internal problems of server: %s", err)
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		switch resp.StatusCode {
-		case http.StatusNotFound:
-			return domain.Repo{}, status.Error(codes.NotFound, resp.Status)
-		case http.StatusMovedPermanently:
-			return domain.Repo{}, status.Error(codes.Unknown, resp.Status)
-		case http.StatusForbidden:
-			return domain.Repo{}, status.Error(codes.PermissionDenied, resp.Status)
-		default:
-			return domain.Repo{}, status.Error(codes.DataLoss, resp.Status)
-		}
+	switch resp.StatusCode {
+	case http.StatusNotFound:
+		return domain.Repo{}, status.Error(codes.NotFound, resp.Status)
+	case http.StatusMovedPermanently:
+		return domain.Repo{}, status.Error(codes.Unknown, resp.Status)
+	case http.StatusForbidden:
+		return domain.Repo{}, status.Error(codes.PermissionDenied, resp.Status)
+	case http.StatusInternalServerError:
+		return domain.Repo{}, status.Error(codes.DataLoss, resp.Status)
 	}
 	var repoInfo gitHubRepo
 	if err := json.NewDecoder(resp.Body).Decode(&repoInfo); err != nil {
-		log.Fatalf("incorrect decoding to Go struct: %s", err)
+		log.Printf("incorrect decoding to Go struct: %s\n", err)
+		return domain.Repo{}, fmt.Errorf("need to fix decoding to Go struct")
 	}
 	return domain.Repo{
 		Name:        repoInfo.Name,

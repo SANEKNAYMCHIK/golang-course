@@ -44,21 +44,25 @@ func (rh *RepoHandler) GetRepoInfo(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		st, ok := status.FromError(err)
 		if !ok {
-			http.Error(w, "internal error", http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		switch st.Code() {
-		case codes.NotFound:
-			http.Error(w, st.Message(), http.StatusNotFound)
-		case codes.Unknown:
-			http.Error(w, st.Message(), http.StatusMovedPermanently)
-		case codes.PermissionDenied:
-			http.Error(w, st.Message(), http.StatusForbidden)
-		default:
-			http.Error(w, st.Message(), http.StatusInternalServerError)
-		}
+		sendGRPCError(w, st)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(data)
+}
+
+func sendGRPCError(w http.ResponseWriter, st *status.Status) {
+	switch st.Code() {
+	case codes.NotFound:
+		http.Error(w, st.Message(), http.StatusNotFound)
+	case codes.Unknown:
+		http.Error(w, st.Message(), http.StatusMovedPermanently)
+	case codes.PermissionDenied:
+		http.Error(w, st.Message(), http.StatusForbidden)
+	default:
+		http.Error(w, st.Message(), http.StatusInternalServerError)
+	}
 }
